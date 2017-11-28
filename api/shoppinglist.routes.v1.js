@@ -20,6 +20,15 @@ routes.get('/shoppingList', function (req, res) {
     })
 });
 
+routes.get('/shoppingList/:name', function (req, res) {
+    res.contentType('application/json');
+    const nameIngredient = res.params.name;
+    ShoppingList.findOne({name : nameIngredient})
+        .then ((result) => {
+            res.send(result);
+        })
+});
+
 routes.put('/shoppingList/:name', function (req, res) {
     res.contentType('application/json');
     const ingredientProps = req.body;
