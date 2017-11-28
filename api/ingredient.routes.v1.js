@@ -11,7 +11,15 @@ routes.post('/ingredient', function (req, res) {
         .then(ingredient => res.send(ingredient));
 });
 
-routes.get('/ingredient/:id', function (req, res) {
+routes.get('/ingredient', function (req, res) {
+    res.contentType('application/json');
+
+    Ingredient.find((result) => {
+        res.send(result);
+    })
+});
+
+routes.put('/ingredient/:id', function (req, res) {
     res.contentType('application/json');
     const ingredientProps = req.body;
     const ingredientId = req.params.id;
@@ -19,6 +27,13 @@ routes.get('/ingredient/:id', function (req, res) {
     Ingredient.findByIdAndUpdate({_id : ingredientId}, ingredientProps)
         .then(() => Ingredient.findbyid({_id : ingredientId}))
         .then((ingredient) => res.send(ingredient));
+});
+
+routes.delete('/ingredient/:id', function (req, res) {
+    res.contentType('application/json');
+    const ingredientId = req.params.id;
+
+    Ingredient.findByIdAndRemove({_id : ingredientId});
 });
 
 module.exports = routes;
