@@ -26,7 +26,7 @@ routes.put('/ingredient/:id', function (req, res) {
     const ingredientId = req.params.id;
 
     Ingredient.findByIdAndUpdate({_id : ingredientId}, ingredientProps)
-        .then(() => Ingredient.findbyid({_id : ingredientId}))
+        .then(() => Ingredient.findById({_id : ingredientId}))
         .then((ingredient) => res.send(ingredient));
 });
 
