@@ -4,7 +4,6 @@ var mongodb = require('../config/mongo.db');
 var User = require('../model/user.model');
 
 routes.post('/ingredient', function (res, req) {
-    res.contentType('application/json');
     const ingredientProps = req.body;
 
     User.create(ingredientProps)
