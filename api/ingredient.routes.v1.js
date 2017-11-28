@@ -14,7 +14,8 @@ routes.post('/ingredient', function (req, res) {
 routes.get('/ingredient', function (req, res) {
     res.contentType('application/json');
 
-    Ingredient.find((result) => {
+    Ingredient.find()
+        .then ((result) => {
         res.send(result);
     })
 });
