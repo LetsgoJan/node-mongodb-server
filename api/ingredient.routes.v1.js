@@ -3,7 +3,8 @@ var routes = express.Router();
 var mongodb = require('../config/mongo.db');
 var User = require('../model/user.model');
 
-routes.post('/ingredient', function (res, req) {
+routes.post('/ingredient', function (req, res) {
+    res.contentType('application/json');
     const ingredientProps = req.body;
 
     User.create(ingredientProps)
