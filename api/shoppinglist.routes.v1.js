@@ -3,7 +3,7 @@ var routes = express.Router();
 var mongodb = require('../config/mongo.db');
 var ShoppingList = require('../model/ingredient.model');
 
-routes.post('/shoppingList', function (req, res) {
+routes.post('/ingredient', function (req, res) {
     res.contentType('application/json');
     const ingredientProps = req.body;
 
@@ -11,7 +11,7 @@ routes.post('/shoppingList', function (req, res) {
         .then(ingredient => res.send(ingredient));
 });
 
-routes.get('/shoppingList', function (req, res) {
+routes.get('/ingredient', function (req, res) {
     res.contentType('application/json');
 
     ShoppingList.find()
@@ -20,26 +20,17 @@ routes.get('/shoppingList', function (req, res) {
     })
 });
 
-routes.get('/shoppingList/:name', function (req, res) {
-    res.contentType('application/json');
-    const nameIngredient = res.params.name;
-    ShoppingList.findOne({name : nameIngredient})
-        .then ((result) => {
-            res.send(result);
-        })
-});
-
-routes.put('/shoppingList/:name', function (req, res) {
+routes.put('/ingredient/:id', function (req, res) {
     res.contentType('application/json');
     const ingredientProps = req.body;
-    const ingredientName = req.params.name;
+    const ingredientId = req.params.id;
 
-    ShoppingList.findByIdAndUpdate({name : ingredientName}, ingredientProps)
-        .then(() => ShoppingList.findOneAndUpdate({name : ingredientName}))
+    ShoppingList.findByIdAndUpdate({_id : ingredientId}, ingredientProps)
+        .then(() => ShoppingList.findById({_id : ingredientId}))
         .then((ingredient) => res.send(ingredient));
 });
 
-routes.delete('/shoppingList/:id', function (req, res) {
+routes.delete('/ingredient/:id', function (req, res) {
     res.contentType('application/json');
     const ingredientId = req.params.id;
 
