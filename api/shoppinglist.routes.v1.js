@@ -3,7 +3,7 @@ var routes = express.Router();
 var mongodb = require('../config/mongo.db');
 var ShoppingList = require('../model/ingredient.model');
 
-routes.post('/ingredient', function (req, res) {
+routes.post('/shoppingList', function (req, res) {
     res.contentType('application/json');
     const ingredientProps = req.body;
 
@@ -11,7 +11,7 @@ routes.post('/ingredient', function (req, res) {
         .then(ingredient => res.send(ingredient));
 });
 
-routes.get('/ingredient', function (req, res) {
+routes.get('/shoppingList', function (req, res) {
     res.contentType('application/json');
 
     ShoppingList.find()
@@ -20,7 +20,7 @@ routes.get('/ingredient', function (req, res) {
     })
 });
 
-routes.put('/ingredient/:id', function (req, res) {
+routes.put('/shoppingList/:id', function (req, res) {
     res.contentType('application/json');
     const ingredientProps = req.body;
     const ingredientId = req.params.id;
@@ -30,7 +30,7 @@ routes.put('/ingredient/:id', function (req, res) {
         .then((ingredient) => res.send(ingredient));
 });
 
-routes.delete('/ingredient/:id', function (req, res) {
+routes.delete('/shoppingList/:id', function (req, res) {
     res.contentType('application/json');
     const ingredientId = req.params.id;
 
