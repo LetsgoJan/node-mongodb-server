@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const IngredientSchema = require('./ingredient.model')
 
 const RecipeSchema = new Schema({
     name: {
@@ -15,9 +16,8 @@ const RecipeSchema = new Schema({
         type: String,
         required: true
     },
-    Ingredients: {
-        type: [{name: String, amount: Number}]
-    }
+    Ingredients: [IngredientSchema]
+
 });
 
 const Recipe = mongoose.model('recipe', RecipeSchema);
