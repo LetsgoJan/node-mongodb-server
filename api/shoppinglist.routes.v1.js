@@ -49,6 +49,7 @@ routes.delete('/shoppingList/:id', function (req, res, next) {
     const ingredientId = req.params.id;
 
     ShoppingList.findByIdAndRemove({_id : ingredientId})
+        .then(res.send({msg:'item deleted'}))
         .catch(next);
 });
 

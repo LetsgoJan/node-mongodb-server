@@ -23,6 +23,17 @@ routes.get('/recipe', function (req, res, next) {
         .catch(next);
 });
 
+routes.get('/recipe/:id', function (req, res, next) {
+    res.contentType('application/json');
+    const recipeId = req.params.id;
+
+    Recipe.findOne({_id : recipeId})
+        .then ((result) => {
+            res.send(result);
+        })
+        .catch(next);
+});
+
 routes.put('/recipe/:id', function (req, res, next) {
     res.contentType('application/json');
     const ingredientProps = req.body;
@@ -34,11 +45,12 @@ routes.put('/recipe/:id', function (req, res, next) {
         .catch(next);
 });
 
-routes.delete('/recipe/:id', function (req, res,next) {
+routes.delete('/recipe/:id', function (req, res, next) {
     res.contentType('application/json');
     const ingredientId = req.params.id;
 
     Recipe.findByIdAndRemove({_id : ingredientId})
+        .then(res.send({msg:'item deleted'}))
         .catch(next);
 });
 
