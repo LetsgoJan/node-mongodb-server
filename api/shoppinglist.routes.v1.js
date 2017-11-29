@@ -1,7 +1,7 @@
 var express = require('express');
 var routes = express.Router();
 var mongodb = require('../config/mongo.db');
-var ShoppingList = require('../model/ingredient.model');
+var ShoppingList = require('../model/ingredient.model').Ingredient;
 
 routes.post('/shoppingList', function (req, res, next) {
     res.contentType('application/json');
