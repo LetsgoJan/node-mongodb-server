@@ -12,30 +12,33 @@ routes.post('/recipe', function (req, res, next) {
         .catch(next);
 });
 
-routes.get('/recipe', function (req, res) {
+routes.get('/recipe', function (req, res, next) {
     res.contentType('application/json');
 
     ShoppingList.find()
         .then ((result) => {
             res.send(result);
         })
+        .catch(next);
 });
 
-routes.put('/recipe/:id', function (req, res) {
+routes.put('/recipe/:id', function (req, res, next) {
     res.contentType('application/json');
     const ingredientProps = req.body;
     const ingredientId = req.params.id;
 
     ShoppingList.findByIdAndUpdate({_id : ingredientId}, ingredientProps)
         .then(() => ShoppingList.findById({_id : ingredientId}))
-        .then((ingredient) => res.send(ingredient));
+        .then((ingredient) => res.send(ingredient))
+        .catch(next);
 });
 
-routes.delete('/recipe/:id', function (req, res) {
+routes.delete('/recipe/:id', function (req, res,next) {
     res.contentType('application/json');
     const ingredientId = req.params.id;
 
-    ShoppingList.findByIdAndRemove({_id : ingredientId});
+    ShoppingList.findByIdAndRemove({_id : ingredientId})
+        .catch(next);
 });
 
 module.exports = routes;
