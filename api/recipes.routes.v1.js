@@ -2,12 +2,13 @@ var express = require('express');
 var routes = express.Router();
 var mongodb = require('../config/mongo.db');
 var ShoppingList = require('../model/ingredient.model');
+var Recipe = require('../model/recipe.model');
 
 routes.post('/recipe', function (req, res, next) {
     res.contentType('application/json');
     const ingredientProps = req.body;
 
-    ShoppingList.create(ingredientProps)
+    Recipe.create(ingredientProps)
         .then(ingredient => res.send(ingredient))
         .catch(next);
 });
@@ -15,7 +16,7 @@ routes.post('/recipe', function (req, res, next) {
 routes.get('/recipe', function (req, res, next) {
     res.contentType('application/json');
 
-    ShoppingList.find()
+    Recipe.find()
         .then ((result) => {
             res.send(result);
         })
@@ -27,7 +28,7 @@ routes.put('/recipe/:id', function (req, res, next) {
     const ingredientProps = req.body;
     const ingredientId = req.params.id;
 
-    ShoppingList.findByIdAndUpdate({_id : ingredientId}, ingredientProps)
+    Recipe.findByIdAndUpdate({_id : ingredientId}, ingredientProps)
         .then(() => ShoppingList.findById({_id : ingredientId}))
         .then((ingredient) => res.send(ingredient))
         .catch(next);
@@ -37,7 +38,7 @@ routes.delete('/recipe/:id', function (req, res,next) {
     res.contentType('application/json');
     const ingredientId = req.params.id;
 
-    ShoppingList.findByIdAndRemove({_id : ingredientId})
+    Recipe.findByIdAndRemove({_id : ingredientId})
         .catch(next);
 });
 
