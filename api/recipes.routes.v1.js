@@ -29,7 +29,7 @@ routes.put('/recipe/:id', function (req, res, next) {
     const ingredientId = req.params.id;
 
     Recipe.findByIdAndUpdate({_id : ingredientId}, ingredientProps)
-        .then(() => ShoppingList.findById({_id : ingredientId}))
+        .then(() => Recipe.findById({_id : ingredientId}))
         .then((ingredient) => res.send(ingredient))
         .catch(next);
 });
