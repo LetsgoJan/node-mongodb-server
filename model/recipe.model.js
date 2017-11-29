@@ -16,7 +16,7 @@ const RecipeSchema = new Schema({
         type: String,
         required: true
     },
-    Ingredients: [IngredientSchema]
+    ingredients: [IngredientSchema]
 
 });
 

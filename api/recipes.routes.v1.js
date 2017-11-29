@@ -3,12 +3,13 @@ var routes = express.Router();
 var mongodb = require('../config/mongo.db');
 var ShoppingList = require('../model/ingredient.model');
 
-routes.post('/recipe', function (req, res) {
+routes.post('/recipe', function (req, res, next) {
     res.contentType('application/json');
     const ingredientProps = req.body;
 
     ShoppingList.create(ingredientProps)
-        .then(ingredient => res.send(ingredient));
+        .then(ingredient => res.send(ingredient))
+        .catch(next);
 });
 
 routes.get('/recipe', function (req, res) {
