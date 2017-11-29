@@ -20,6 +20,16 @@ routes.get('/shoppingList', function (req, res) {
     })
 });
 
+routes.get('/shoppingList/:id', function (req, res) {
+    res.contentType('application/json');
+    const ingredientId = req.params.id;
+
+    ShoppingList.find(ShoppingList._id = ingredientId)
+        .then ((result) => {
+            res.send(result);
+        })
+});
+
 routes.put('/shoppingList/:id', function (req, res) {
     res.contentType('application/json');
     const ingredientProps = req.body;
